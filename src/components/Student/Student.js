@@ -21,7 +21,7 @@ function Student() {
     createBrowserHistory().push("/students");
     createBrowserHistory().go(0);
   };
-
+  
   return (
     <div className="page-wrapper">
       <div className="row">

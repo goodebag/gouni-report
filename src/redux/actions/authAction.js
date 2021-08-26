@@ -74,7 +74,6 @@ export const registerStudent = (data) => {
 export const updateStudent = (data) => {
   return async (dispatch) => {
     const body = JSON.stringify({ data });
-    console.log("data 2: ", body);
     try {
       const response = await baseUrl.post(
         "/api/Reports/EditStudentInfo",
@@ -483,7 +482,7 @@ export const getActiveStudentsByProgramme = (data) => {
       dispatch({
         type: _const.GET_ACTIVE_STUDENTS_BY_PROGRAMME,
         payload: res.data,
-      }, console.log("Res Data", res.data));
+      });
     } catch (error) {
       throw error;
     }
@@ -501,13 +500,51 @@ export const getStudentAdmissionSeekersByProgram = (data) => {
         }
       );
       dispatch({
-        type: _const.GET_STUDENT_ADMISSISION_SEEKERS_BY_PROGAME,
+        type: _const.GET_STUDENT_ADMISSISION_SEEKERS_BY_PROGAM,
         payload: res.data,
-      }, console.log("Res Data", res.data));
+      });
     } catch (error) {
       throw error;
     }
   };
 };
 
-        // "/api/Reports/ActiveStudentsByProgramme",
+export const getPaymentsBySession = (data) => {
+  console.log("Data Dog", data);
+  return async (dispatch) => {
+    try {
+      const res = await baseUrl.post("/api/Reports/GetPaymentsBySession", data, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: AuthUtility.RetrieveAuthorizationHeader(),
+          },
+        }
+      );
+      dispatch({
+        type: _const.GET_PAYMENTS_BY_SESSION,
+        payload: res.data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const getStudentPaymentById = (paymentId) => {
+  return async (dispatch) => {
+    try {
+      const res = await baseUrl.get(`api/Reports/GetSTUDENTPaymentById/${paymentId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: AuthUtility.RetrieveAuthorizationHeader(),
+        },
+      });
+      dispatch({
+        type: _const.GET_STUDENT_PAYMENT_BY_ID,
+        payload: res.data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};

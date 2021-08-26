@@ -6,7 +6,7 @@ import PropsTypes from "prop-types";
 import { login } from "../../redux/actions/authAction";
 import { clearErrors } from "../../redux/actions/errorAction";
 
-function Login() {
+const Login = () => {
   const initialState = {
     username: "",
     password: "",

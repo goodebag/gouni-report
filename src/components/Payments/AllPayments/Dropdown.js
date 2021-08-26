@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropsTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAdmissionSeekers,
-  getAllSession,
-} from "../../redux/actions/authAction";
+import { getPaymentsBySession, getAllSession } from "../../../redux/actions/authAction";
 
-function Dropdown() {
+const Dropdown = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +29,7 @@ function Dropdown() {
   useEffect(() => {
     if (selectedOption) {
       let data = sessionData[0];
-      dispatch(getAdmissionSeekers(data || selectedOption));
+      dispatch(getPaymentsBySession(data || selectedOption));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption]);

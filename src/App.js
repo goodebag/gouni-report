@@ -13,10 +13,13 @@ import Login from "./components/Auth/Login";
 import RegisterStudent from "./components/RegisterStudent";
 import Students from "./components/Students";
 import Student from "./components/Student";
-import ActiveStudents from "./components/ActiveStudents";
 import UnadmittedCandidate from "./components/UnadmittedCandidate";
 import PaymentsSession from "./components/PaymentsSession";
 import Sessions from "./components/Sessions";
+import AllPayments from "./components/Payments/AllPayments";
+import OfflinePayment from "./components/Payments/OfflinePayment";
+import OnlinePayment from "./components/Payments/OnlinePayment";
+import StudentPayment from "./components/StudentPayment";
 import NotFound from "./components/NotFound/NotFound";
 import checkToken from "./utils/checkToken";
 
@@ -37,9 +40,12 @@ function App() {
             <Route exact path="/student" component={Authorize(RegisterStudent)} />
             <Route exact path="/students" component={Authorize(Students)} />
             <Route exact path="/student/:id" component={Authorize(Student)} />
-            <Route exact path="/activestudents" component={Authorize(ActiveStudents)} />
             <Route exact path="/unadmittedcandidate" component={Authorize(UnadmittedCandidate)} />
             <Route exact path="/sessions" component={Authorize(Sessions)} />
+            <Route exact path="/allpayments" component={Authorize(AllPayments)} />
+            <Route exact path="/offlinepayment" component={Authorize(OfflinePayment)} />
+            <Route exact path="/onlinepayment" component={Authorize(OnlinePayment)} />
+            <Route exact path="/payment/:paymentId" component={Authorize(StudentPayment)} />
             <Route exact path="/payments/:personId/:sessionId" component={Authorize(PaymentsSession)} />
             <Route component={Authenticated(NotFound)} />
           </Switch>

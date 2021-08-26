@@ -11,11 +11,13 @@ function SideBar() {
   const history = useHistory();
 
   const handleLogout = () => {
-    dispatch(logout(
-      setTimeout(() => {
-        history.push("/login");
-      }, 3000)
-    ));
+    dispatch(
+      logout(
+        setTimeout(() => {
+          history.push("/login");
+        }, 3000)
+      )
+    );
   };
 
   return (
@@ -62,10 +64,53 @@ function SideBar() {
                 <span className="hide-menu">Sessions </span>
               </a>
             </li>
+
+            {/* <li className="sidebar-item">
+              <a
+                className="sidebar-link waves-effect waves-dark"
+                href="/payments"
+                aria-expanded="false"
+              >
+                <i className="mdi mdi-dns" />
+                <span className="hide-menu">Payments </span>
+              </a>
+            </li> */}
+
+            <li className="sidebar-item">
+              <a
+                className="sidebar-link has-arrow waves-effect waves-dark"
+                href="javascript:void(0)"
+                aria-expanded="false"
+              >
+                <i className="mdi mdi-dns"></i>
+                <span className="hide-menu">Payments </span>
+              </a>
+              <ul aria-expanded="false" className="collapse  first-level">
+                <li className="sidebar-item">
+                  <a href="/allpayments" className="sidebar-link">
+                    <i className="mdi mdi-adjust"></i>
+                    <span className="hide-menu">All Payments </span>
+                  </a>
+                </li>
+                <li className="sidebar-item">
+                  <a href="/offlinepayment" className="sidebar-link">
+                    <i className="mdi mdi-adjust"></i>
+                    <span className="hide-menu">Offline Payment</span>
+                  </a>
+                </li>
+                <li className="sidebar-item">
+                  <a href="/onlinepayment" className="sidebar-link">
+                    <i className="mdi mdi-adjust"></i>
+                    <span className="hide-menu">Online Payment</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
             <li className="sidebar-item">
               <span
                 className="sidebar-link waves-effect waves-dark"
-                style={{cursor: 'pointer'}}
+                style={{ cursor: "pointer" }}
                 aria-expanded="false"
                 onClick={handleLogout}
               >

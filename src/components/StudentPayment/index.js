@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../Reusables/Header/Header";
 import SideBar from "../SideBar/SideBar";
-import ActiveStudents from "./ActiveStudents";
+import StudentPayment from "./StudentPayment";
 
 function index() {
     return (
         <div>
             <Header />
             <SideBar />
-            <ActiveStudents />
+            <StudentPayment />
         </div>
     );
 }

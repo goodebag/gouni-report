@@ -25,6 +25,8 @@ const initialState = {
   convertedStudentsBySession: {},
   activeStudentsByProgramme: [],
   studentAdmissionSeekersByProgram: [],
+  paymentsBySession: [],
+  studentPaymentById: []
 };
 
 const authReducer = (state = initialState, action) => {
@@ -175,11 +177,23 @@ const authReducer = (state = initialState, action) => {
         activeStudentsByProgramme: action.payload,
       };
 
-    case _const.GET_STUDENT_ADMISSISION_SEEKERS_BY_PROGAME:
+    case _const.GET_STUDENT_ADMISSISION_SEEKERS_BY_PROGAM:
       return {
         ...state,
         studentAdmissionSeekersByProgram: action.payload,
       };
+
+    case _const.GET_PAYMENTS_BY_SESSION:
+      return {
+        ...state,
+        paymentsBySession: action.payload
+      }
+
+      case _const.GET_STUDENT_PAYMENT_BY_ID:
+        return {
+          ...state,
+          studentPaymentById: action.payload
+        }
 
     default:
       return state;
