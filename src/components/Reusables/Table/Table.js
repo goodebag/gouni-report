@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useTable, usePagination, useGlobalFilter } from "react-table";
 import TableSearch from "../TableSearch/TableSearch";
 
-function Table(props) {
+const Table = (props) => {
   // console.log("Props", props)
   const columns = useMemo(() => props.columns, [props.columns]);
   const data = useMemo(() => props.data, [props.data]);
@@ -32,12 +32,12 @@ function Table(props) {
   return (
     <div>
       <div className="d-flex justify-content-center">
-          <TableSearch
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
-        </div>
+        <TableSearch
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+      </div>
       <div className="table-wrapper">
         <table id="emp" {...getTableProps()}>
           <thead>
@@ -85,6 +85,6 @@ function Table(props) {
       </div>
     </div>
   );
-}
+};
 
 export default Table;

@@ -6,7 +6,7 @@ import {
   getAllSession,
 } from "../../redux/actions/authAction";
 
-function Dropdown() {
+const Dropdown = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Dropdown() {
       </select>
     </div>
   );
-}
+};
 
 Dropdown.propsTypes = {
   getAllSession: PropsTypes.func.isRequired,

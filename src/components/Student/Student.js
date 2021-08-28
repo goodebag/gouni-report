@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getOneStudent } from "../../redux/actions/authAction";
 
-function Student() {
+const Student = () => {
   const oneStudent = useSelector((state) => state.auth.oneStudent);
 
   const dispatch = useDispatch();
@@ -21,26 +21,26 @@ function Student() {
     createBrowserHistory().push("/students");
     createBrowserHistory().go(0);
   };
-  
+
   return (
     <div className="page-wrapper">
       <div className="row">
-          <div className="col-lg-12">
-            <div className="card shadow-sm mb-0">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <h2 className="text-primary mb-0">Candidate</h2>
-                  <button
-                    className="btn btn-sm pg-button btn-primary py-2 px-3 ml-auto"
-                    onClick={() => getBack()}
-                  >
-                    Back
-                  </button>
-                </div>
+        <div className="col-lg-12">
+          <div className="card shadow-sm mb-0">
+            <div className="card-body">
+              <div className="d-flex align-items-center">
+                <h2 className="text-primary mb-0">Candidate</h2>
+                <button
+                  className="btn btn-sm pg-button btn-primary py-2 px-3 ml-auto"
+                  onClick={() => getBack()}
+                >
+                  Back
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </div>
       <div className="container-fluid forms-wrapper">
         <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12 px-0">
@@ -69,7 +69,9 @@ function Student() {
                     >
                       Mobile Phone
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.mobilePhone
                         ? oneStudent.mobilePhone
                         : "No Mobile Phone"}
@@ -85,7 +87,9 @@ function Student() {
                     >
                       Department Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.departmentName
                         ? oneStudent.departmentName
                         : "No Department Name"}
@@ -101,7 +105,9 @@ function Student() {
                     >
                       Appication Number
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.appicationNumber
                         ? oneStudent.appicationNumber
                         : "No Appication Number"}
@@ -117,7 +123,9 @@ function Student() {
                     >
                       State Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.stateName
                         ? oneStudent.stateName
                         : "No State Name"}
@@ -133,7 +141,9 @@ function Student() {
                     >
                       Local Government Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.localGovernmentName
                         ? oneStudent.localGovernmentName
                         : "No Local Government Name"}
@@ -149,7 +159,9 @@ function Student() {
                     >
                       Parent Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.parentName
                         ? oneStudent.parentName
                         : "No Name"}
@@ -165,7 +177,9 @@ function Student() {
                     >
                       Parent Number
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.parentNumber
                         ? oneStudent.parentNumber
                         : "No Number"}
@@ -181,7 +195,9 @@ function Student() {
                     >
                       Religion Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.religionName
                         ? oneStudent.religionName
                         : "No Religion Name"}
@@ -197,7 +213,9 @@ function Student() {
                     >
                       Admitted
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.admitted ? "Yes" : "No"}
                     </p>
                   </div>
@@ -211,7 +229,9 @@ function Student() {
                     >
                       Contact Address
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.contactAddress
                         ? oneStudent.contactAddress
                         : "No Contact Address"}
@@ -227,7 +247,9 @@ function Student() {
                     >
                       Programme Name
                     </span>
-                    <p style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}>
+                    <p
+                      style={{ fontWeight: 600, marginBottom: 0, fontSize: 16 }}
+                    >
                       {oneStudent.programmeName
                         ? oneStudent.programmeName
                         : "No Programme Name"}
@@ -241,7 +263,7 @@ function Student() {
       </div>
     </div>
   );
-}
+};
 
 Student.propsTypes = {
   getOneStudent: PropsTypes.func.isRequired,

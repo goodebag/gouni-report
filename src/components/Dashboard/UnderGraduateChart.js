@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,7 +8,7 @@ import {
   getConvertedStudentsBySession,
 } from "../../redux/actions/authAction";
 
-function UnderGraduateChart(props) {
+const UnderGraduateChart = (props) => {
   const activeStudentsNumberBySession = useSelector(
     (state) => state.auth.activeStudentsNumberBySession
   );
@@ -23,12 +23,16 @@ function UnderGraduateChart(props) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const handleData = useCallback(() => {
     dispatch(getActiveStudentsNumberBySession(props.data));
     dispatch(getTotalNumberOfAdmissionSeekers(props.data));
     dispatch(getConvertedStudentsBySession(props.data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    handleData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleData]);
 
   const data = {
     labels: [
@@ -65,6 +69,6 @@ function UnderGraduateChart(props) {
       />
     </div>
   );
-}
+};
 
 export default UnderGraduateChart;

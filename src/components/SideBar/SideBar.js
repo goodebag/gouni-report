@@ -6,7 +6,7 @@ import { logout } from "../../redux/actions/authAction";
 import logo from "./image/img-user.jpeg";
 import wall from "./image/user-info.jpg";
 
-function SideBar() {
+const SideBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -123,7 +123,7 @@ function SideBar() {
       </div>
     </aside>
   );
-}
+};
 
 SideBar.propsTypes = {
   logout: PropsTypes.func.isRequired,

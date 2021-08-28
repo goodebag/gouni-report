@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../Reusables/Header/Header";
 import SideBar from "../SideBar/SideBar";
-import MainContent from "./MainContent";
+import DashboardContainer from "./DashboardContainer";
 
-function index() {
-    return (
-        <div>
-            <Header />
-            <SideBar />
-            <MainContent />
-        </div>
-    );
-}
+const index = () => {
+  return (
+    <>
+      <Header />
+      <SideBar />
+      <DashboardContainer />
+    </>
+  );
+};
 
 export default index;

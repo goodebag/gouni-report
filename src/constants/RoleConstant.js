@@ -1,11 +1,8 @@
-
 const RoleConst = {
-    RECORDS:"Records",
-    BANKADMIN:"BankAdmin",
-    ICT:"Ict",
-    ADMIN:"Admin"
-}
+  RECORDS: "Records",
+  BANKADMIN: "BankAdmin",
+  ICT: "Ict",
+  ADMIN: "Admin",
+};
 
-export {
-    RoleConst
-}
+export { RoleConst };

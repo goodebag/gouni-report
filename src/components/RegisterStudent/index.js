@@ -3,14 +3,14 @@ import Header from "../Reusables/Header/Header";
 import SideBar from "../SideBar/SideBar";
 import RegisterStudent from "./RegisterStudent";
 
-function index() {
-    return (
-        <div>
-            <Header />
-            <SideBar />
-            <RegisterStudent />
-        </div>
-    );
-}
+const index = () => {
+  return (
+    <>
+      <Header />
+      <SideBar />
+      <RegisterStudent />
+    </>
+  );
+};
 
 export default index;

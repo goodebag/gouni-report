@@ -3,7 +3,7 @@ import Header from "../../Reusables/Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import OnlinePayment from "./OnlinePayment";
 
-function index() {
+const index = () => {
   return (
     <div>
       <Header />
@@ -11,6 +11,6 @@ function index() {
       <OnlinePayment />
     </div>
   );
-}
+};
 
 export default index;

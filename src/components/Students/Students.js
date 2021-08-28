@@ -8,7 +8,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { getAllStudents } from "../../redux/actions/authAction";
 import Table from "../Reusables/Table/Table";
 
-function Students() {
+const Students = () => {
   const allStudents = useSelector((state) => state.auth.allStudents);
 
   const dispatch = useDispatch();
@@ -137,7 +137,7 @@ function Students() {
       </div>
     </div>
   );
-}
+};
 
 Students.propsTypes = {
   getAllStudents: PropsTypes.func.isRequired,

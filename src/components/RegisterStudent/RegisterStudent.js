@@ -8,7 +8,7 @@ import { RoleConst } from "../../constants/RoleConstant";
 import { createBrowserHistory } from "history";
 import EditStudent from "../EditStudent/EditStudent";
 
-function RegisterStudent() {
+const RegisterStudent = () => {
   const initialState = {
     firstName: "",
     lastName: "",
@@ -181,7 +181,7 @@ function RegisterStudent() {
       </div>
     </div>
   );
-}
+};
 
 RegisterStudent.propsTypes = {
   error: PropsTypes.object.isRequired,
