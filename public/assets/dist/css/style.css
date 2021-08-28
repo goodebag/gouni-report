@@ -1,6 +1,7 @@
 body, html {
   -webkit-font-smoothing: antialiased;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 1rem;
   color: #2d3748;
@@ -18276,7 +18277,7 @@ body, html {
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent
@@ -18288,7 +18289,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-size: .875rem;
   font-weight: 300;
   line-height: 1.5;
@@ -25882,7 +25883,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -25995,7 +25996,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -34334,7 +34335,7 @@ form label {
   padding: 10px 10px 10px 0;
   display: block;
   border: none;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   border-radius: 0;
   border-bottom: 1px solid #e9ecef
 }
@@ -34777,7 +34778,7 @@ form label {
   border: 1px solid rgba(120, 130, 140, .13);
   padding: 8px 16px;
   height: auto;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-weight: 400;
   border-radius: 0
 }
@@ -41139,7 +41140,10 @@ a.text-primary:hover {
 .loader {
   width: 100%;
   height: 100%;
-  top: 0;
+  /* top: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 99999;
   background: #fff;

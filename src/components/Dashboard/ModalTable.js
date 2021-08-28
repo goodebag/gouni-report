@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import Modal from 'react-modal';
+import React, { useEffect, useRef } from "react";
+import Modal from "react-modal";
 import { useSelector } from "react-redux";
 import { createBrowserHistory } from "history";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
@@ -7,43 +7,42 @@ import Pdf from "react-to-pdf";
 
 import UtilityService from "../../utils/UtilityServices";
 import { RoleConst } from "../../constants/RoleConstant";
-import Table from '../Reusables/Table/Table';
+import Table from "../Reusables/Table/Table";
 
 const customStyles = {
-    overlay: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: "9999",
-        backgroundColor: 'rgba(255, 255, 255, 0.75)'
-      },
-      content: {
-        position: 'absolute',
-        top: '80px',
-        left: '250px',
-        right: '5px',
-        bottom: '10px',
-        border: '1px solid #ccc',
-        background: '#fff',
-        overflow: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        borderRadius: '0px',
-        outline: 'none',
-        padding: '20px',
-        
-    }
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: "9999",
+    backgroundColor: "rgba(255, 255, 255, 0.75)",
+  },
+  content: {
+    position: "absolute",
+    top: "80px",
+    left: "250px",
+    right: "5px",
+    bottom: "10px",
+    border: "1px solid #ccc",
+    background: "#fff",
+    overflow: "auto",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "0px",
+    outline: "none",
+    padding: "20px",
+  },
 };
 
 function ModalTable(props) {
-    // console.log("Props", props)
+  // console.log("Props", props)
 
-    useEffect(() => {
-        Modal.setAppElement('body');
-    }, [])
+  useEffect(() => {
+    Modal.setAppElement("body");
+  }, []);
 
-//   let subtitle;
+  //   let subtitle;
   // const [modalIsOpen, setIsOpen] = useState(false);
 
   // function openModal() {
@@ -73,7 +72,7 @@ function ModalTable(props) {
       createBrowserHistory().push("/login");
       createBrowserHistory().go();
     }
-  }, []);
+  }, [activeStudentsByProgramme, studentAdmissionSeekersByProgram]);
 
   const columns = [
     {
@@ -104,45 +103,82 @@ function ModalTable(props) {
       Header: "Faculty Name",
       accessor: "facultyName",
     },
+    {
+      Header: "",
+      accessor: "payment",
+    },
   ];
+
+  let selected;
+
+  if (activeStudentsByProgramme.length < 1) {
+    selected = studentAdmissionSeekersByProgram;
+  } else {
+    selected = activeStudentsByProgramme;
+  }
+
+  const getPaymentsPage = (student) => {
+    createBrowserHistory().push(
+      `/payments/${student.personId}/${student.sessionId}`
+    );
+    createBrowserHistory().go(0);
+  };
+
+  function getData(allStudents) {
+    return allStudents.map((student, index) => {
+      return {
+        ...student,
+        payment: (
+          <button
+            className="btn btn-sm pg-button btn-primary px-3"
+            onClick={() => getPaymentsPage(student)}
+          >
+            Payment
+          </button>
+        )
+      };
+    });
+  }
 
   return (
     <div>
-        <Modal 
-            isOpen={props.modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal">
-                <div className="d-flex align-items-center">
-                  <ReactHTMLTableToExcel
-                    className="btn btn-sm pg-button btn-primary py-2"
-                    table="emp"
-                    filename="Sessions Data Report"
-                    sheet="Sheet"
-                    buttonText="Export Excel"
-                  />
-                  <Pdf targetRef={ref} filename="sessions-data.pdf">
-                    {({ toPdf }) => (
-                      <button
-                        className="btn btn-sm pg-button btn-primary py-2 ml-2"
-                        onClick={toPdf}
-                      >
-                        Generate Pdf
-                      </button>
-                    )}
-                  </Pdf>
-                  <button onClick={closeModal} className="btn btn-sm pg-button btn-primary px-3 py-2 ml-auto">X</button>
-                </div>
-            <div className="card" >
-            <div ref={ref} id="section-to-print">
-                <Table
-                    id="emp"
-                    columns={columns}
-                    data={activeStudentsByProgramme || studentAdmissionSeekersByProgram}
-                />
-                </div>
-            </div>
-        </Modal>
+      <Modal
+        isOpen={props.modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="d-flex align-items-center">
+          <ReactHTMLTableToExcel
+            className="btn btn-sm pg-button btn-primary py-2"
+            table="emp"
+            filename="Sessions Data Report"
+            sheet="Sheet"
+            buttonText="Export Excel"
+          />
+          <Pdf targetRef={ref} filename="sessions-data.pdf">
+            {({ toPdf }) => (
+              <button
+                className="btn btn-sm pg-button btn-primary py-2 ml-2"
+                onClick={toPdf}
+              >
+                Generate Pdf
+              </button>
+            )}
+          </Pdf>
+          <button
+            onClick={closeModal}
+            className="btn btn-sm pg-button btn-primary px-3 py-2 ml-auto"
+          >
+            X
+          </button>
+        </div>
+        <div className="card">
+          <div ref={ref} id="section-to-print">
+            <Table id="emp" columns={columns} data={getData(selected)} />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

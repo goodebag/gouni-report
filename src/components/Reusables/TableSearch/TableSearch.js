@@ -2,7 +2,11 @@ import React, { useState, useRef } from "react";
 import { useAsyncDebounce } from "react-table";
 import { SearchOutlined } from "@ant-design/icons";
 
-function TableSearch({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) {
+const TableSearch = ({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) => {
   const inputRef = useRef(null);
   const count = preGlobalFilteredRows.length;
   const [value, setValue] = useState(globalFilter);
@@ -33,6 +37,6 @@ function TableSearch({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) {
       </div>
     </div>
   );
-}
+};
 
 export default TableSearch;

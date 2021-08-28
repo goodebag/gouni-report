@@ -7,7 +7,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import Table from "../Reusables/Table/Table";
 import Dropdown from "./Dropdown";
 
-function Sessions() {
+const Sessions = () => {
   const admissionSeekers = useSelector((state) => state.auth.admissionSeekers);
 
   const ref = useRef();
@@ -95,7 +95,7 @@ function Sessions() {
       </div>
     </div>
   );
-}
+};
 
 Sessions.propsTypes = {
   getAdmissionSeekers: PropsTypes.func.isRequired,

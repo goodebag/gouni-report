@@ -10,7 +10,7 @@ import UnderGraduateColumn from "./UnderGraduateColumn";
 import PostGraduateColumn from "./PostGraduateColumn";
 import { getAllSession } from "../../redux/actions/authAction";
 
-function MainContent() {
+const DashboardContainer = () => {
   useEffect(() => {
     let isUserQualified = UtilityService.IsUserQualifiedForRole([
       RoleConst.ADMIN,
@@ -126,6 +126,6 @@ function MainContent() {
       </div>
     </div>
   );
-}
+};
 
-export default MainContent;
+export default DashboardContainer;

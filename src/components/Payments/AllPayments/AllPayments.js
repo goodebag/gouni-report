@@ -5,55 +5,46 @@ import { createBrowserHistory } from "history";
 import { useSelector, useDispatch } from "react-redux";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
-import { getAllStudents } from "../../redux/actions/authAction";
-import Table from "../Reusables/Table/Table";
+import { getPaymentsBySession } from "../../../redux/actions/authAction";
+import Table from "../../Reusables/Table/Table";
+import Dropdown from "./Dropdown";
 
-const Students = () => {
-  const allStudents = useSelector((state) => state.auth.allStudents);
+const AllPayments = () => {
+  const paymentsBySession = useSelector(
+    (state) => state.auth.paymentsBySession
+  );
 
   const dispatch = useDispatch();
   const ref = useRef();
 
   useEffect(() => {
-    dispatch(getAllStudents());
+    const data = {
+      sessionId: 0,
+      sessionName: "",
+      activated: true,
+      adminting: true,
+      paymentMode: 0,
+    };
+
+    dispatch(getPaymentsBySession(data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getStudentPage = (student) => {
-    createBrowserHistory().push(`/student/${student.personId}`);
+  const handlePayment = (student) => {
+    createBrowserHistory().push(`/payment/${student.paymentId}`);
     createBrowserHistory().go(0);
   };
 
-  const getPaymentsPage = (student) => {
-    createBrowserHistory().push(
-      `/payments/${student.personId}/${student.sessionId}`
-    );
-    createBrowserHistory().go(0);
-  };
-
-  const getStudent = () => {
-    createBrowserHistory().push("/student");
-    createBrowserHistory().go(0);
-  };
-
-  function getData(allStudents) {
-    return allStudents.map((student, index) => {
+  function getData(paymentsBySession) {
+    return paymentsBySession.map((student, index) => {
       return {
         ...student,
         payment: (
           <button
             className="btn btn-sm pg-button btn-primary px-3"
-            onClick={() => getPaymentsPage(student)}
+            onClick={() => handlePayment(student)}
           >
             Payment
-          </button>
-        ),
-        info: (
-          <button
-            className="btn btn-sm pg-button btn-primary px-3"
-            onClick={() => getStudentPage(student)}
-          >
-            Info
           </button>
         ),
       };
@@ -63,19 +54,23 @@ const Students = () => {
   const columns = [
     {
       Header: "First Name",
-      accessor: "firstName",
+      accessor: "firstname",
     },
     {
       Header: "Last Name",
-      accessor: "lastName",
+      accessor: "lastname",
     },
     {
-      Header: "Mobile Phone",
-      accessor: "mobilePhone",
+      Header: "Mobile Number",
+      accessor: "mobileNumber",
     },
     {
-      Header: "Email Address",
-      accessor: "emailAddress",
+      Header: "Level Name",
+      accessor: "levelName",
+    },
+    {
+      Header: "Payment Type",
+      accessor: "paymentType",
     },
     {
       Header: "Programme Name",
@@ -85,11 +80,19 @@ const Students = () => {
       Header: "",
       accessor: "payment",
     },
-    {
-      Header: "",
-      accessor: "info",
-    },
   ];
+
+  let renderData = () => {
+    if (paymentsBySession.length === 0 || !paymentsBySession) {
+      return <h5 className="text-center mb-0 p-md-0 p-4">Data not found. Select another session from the dropdown to show the data!</h5>;
+    } else {
+      return (
+        <div ref={ref} id="section-to-print">
+          <Table id="emp" columns={columns} data={getData(paymentsBySession)} />
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="page-wrapper">
@@ -102,11 +105,11 @@ const Students = () => {
                   <ReactHTMLTableToExcel
                     className="btn btn-sm pg-button btn-primary py-2"
                     table="emp"
-                    filename="Students Data Report"
+                    filename="Payments Data Report"
                     sheet="Sheet"
                     buttonText="Export Excel"
                   />
-                  <Pdf targetRef={ref} filename="students-data.pdf">
+                  <Pdf targetRef={ref} filename="payments-data.pdf">
                     {({ toPdf }) => (
                       <button
                         className="btn btn-sm pg-button btn-primary py-2 ml-2"
@@ -116,12 +119,7 @@ const Students = () => {
                       </button>
                     )}
                   </Pdf>
-                  <button
-                    className="btn btn-sm pg-button btn-primary py-2 ml-auto"
-                    onClick={() => getStudent()}
-                  >
-                    Get Student
-                  </button>
+                  <Dropdown />
                 </div>
               </div>
             </div>
@@ -129,9 +127,7 @@ const Students = () => {
         </div>
         <div className="row">
           <div className="col-lg-12 card-layout border__radius_20">
-            <div ref={ref} id="section-to-print">
-              <Table id="emp" columns={columns} data={getData(allStudents)} />
-            </div>
+            {renderData()}
           </div>
         </div>
       </div>
@@ -139,9 +135,9 @@ const Students = () => {
   );
 };
 
-Students.propsTypes = {
-  getAllStudents: PropsTypes.func.isRequired,
-  allStudents: PropsTypes.object.isRequired,
+AllPayments.propsTypes = {
+  getPaymentsBySession: PropsTypes.func.isRequired,
+  paymentsBySession: PropsTypes.array.isRequired,
 };
 
-export default Students;
+export default AllPayments;

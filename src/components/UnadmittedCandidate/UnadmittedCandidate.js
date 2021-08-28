@@ -9,8 +9,7 @@ import UtilityService from "../../utils/UtilityServices";
 import { RoleConst } from "../../constants/RoleConstant";
 import Table from "../Reusables/Table/Table";
 
-function UnadmittedCandidate() {
-
+const UnadmittedCandidate = () => {
   const studentAdmissionSeekersByProgram = useSelector(
     (state) => state.auth.studentAdmissionSeekersByProgram
   );
@@ -114,7 +113,7 @@ function UnadmittedCandidate() {
       </div>
     </div>
   );
-}
+};
 
 UnadmittedCandidate.propsTypes = {
   studentAdmissionSeekersByProgram: PropsTypes.array.isRequired,
