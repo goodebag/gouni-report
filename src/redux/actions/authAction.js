@@ -184,7 +184,6 @@ export const getOneStudent = (Person) => {
 };
 
 export const getActiveStudents = (data) => {
-  console.log("Data", data)
   return async (dispatch) => {
     try {
       const res = await baseUrl.post("/api/Reports/ActiveStudents", data, {
@@ -196,7 +195,7 @@ export const getActiveStudents = (data) => {
       dispatch({
         type: _const.GET_ACTIVE_STUDENTS,
         payload: res.data,
-      }, console.log("Res Data", res.data));
+      });
     } catch (error) {
       throw error;
     }
