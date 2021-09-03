@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropsTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { logout, getUser } from "../../../redux/actions/authAction";
 import brand from "./image/brand-user.png";
 import logo from "./image/img-user.jpeg";
@@ -16,8 +17,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getUser());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(
@@ -49,8 +49,8 @@ const Header = () => {
               />
             </b>
             <span
-              className="logo-text font-weight-bold"
-              style={{ fontSize: "19px" }}
+              className="logo-text font-weight-bolder"
+              style={{ fontSize: "20px" }}
             >
               Gouni Report
             </span>
@@ -117,7 +117,6 @@ const Header = () => {
         <div className="navbar-collapse collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto float-left">
             <li className="nav-item">
-              {" "}
               <span
                 className="nav-link sidebartoggler d-none d-md-block waves-effect waves-dark"
                 style={{ cursor: "pointer" }}

@@ -3,12 +3,13 @@ import PropsTypes from "prop-types";
 import { useSelector } from "react-redux";
 import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import { createBrowserHistory } from "history";
 
 import Table from "../Reusables/Table/Table";
 import Dropdown from "./Dropdown";
 
-const Sessions = () => {
-  const admissionSeekers = useSelector((state) => state.auth.admissionSeekers);
+const Candidates = () => {
+  const activeStudents = useSelector((state) => state.auth.activeStudents);
 
   const ref = useRef();
 
@@ -34,12 +35,57 @@ const Sessions = () => {
       accessor: "programmeName",
     },
     {
-      Header: "Department Name",
-      accessor: "departmentName",
+      Header: "",
+      accessor: "payment",
+    },
+    {
+      Header: "",
+      accessor: "info",
     },
   ];
 
-  let checkArrLength = admissionSeekers.length === 0;
+  const getStudentPage = (student) => {
+    createBrowserHistory().push(`/student/${student.personId}`);
+    createBrowserHistory().go(0);
+  };
+
+  const getPaymentsPage = (student) => {
+    createBrowserHistory().push(
+      `/payments/${student.personId}/${student.sessionId}`
+    );
+    createBrowserHistory().go(0);
+  };
+
+  const getCandidate = () => {
+    createBrowserHistory().push("/candidate");
+    createBrowserHistory().go(0);
+  };
+
+  function getData(activeStudents) {
+    return activeStudents.map((student, index) => {
+      return {
+        ...student,
+        payment: (
+          <button
+            className="btn btn-sm pg-button btn-primary px-3"
+            onClick={() => getPaymentsPage(student)}
+          >
+            Payment
+          </button>
+        ),
+        info: (
+          <button
+            className="btn btn-sm pg-button btn-primary px-3"
+            onClick={() => getStudentPage(student)}
+          >
+            Info
+          </button>
+        ),
+      };
+    });
+  }
+
+  let checkArrLength = activeStudents.length === 0;
 
   const topCard = (
     <div className="row">
@@ -50,11 +96,11 @@ const Sessions = () => {
               <ReactHTMLTableToExcel
                 className="btn btn-sm pg-button btn-primary py-2"
                 table="emp"
-                filename="Sessions Data Report"
+                filename="Students Data Report"
                 sheet="Sheet"
                 buttonText="Export Excel"
               />
-              <Pdf targetRef={ref} filename="sessions-data.pdf">
+              <Pdf targetRef={ref} filename="students-data.pdf">
                 {({ toPdf }) => (
                   <button
                     className="btn btn-sm pg-button btn-primary py-2 ml-2"
@@ -64,7 +110,15 @@ const Sessions = () => {
                   </button>
                 )}
               </Pdf>
-              <Dropdown />
+              <div className="d-flex ml-auto">
+                <button
+                  className="btn btn-sm pg-button btn-primary py-2 mr-2"
+                  onClick={() => getCandidate()}
+                >
+                  Get Candidate
+                </button>
+                <Dropdown />
+              </div>
             </div>
           </div>
         </div>
@@ -94,7 +148,13 @@ const Sessions = () => {
         <div className="row">
           <div className="col-lg-12 card-layout border__radius_20">
             <div ref={ref} id="section-to-print">
-              <Table id="emp" columns={columns} data={admissionSeekers} />
+              <div ref={ref} id="section-to-print">
+                <Table
+                  id="emp"
+                  columns={columns}
+                  data={getData(activeStudents)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -103,8 +163,8 @@ const Sessions = () => {
   );
 };
 
-Sessions.propsTypes = {
-  admissionSeekers: PropsTypes.array.isRequired,
+Candidates.propsTypes = {
+  activeStudents: PropsTypes.array.isRequired,
 };
 
-export default Sessions;
+export default Candidates;

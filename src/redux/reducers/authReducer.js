@@ -26,7 +26,7 @@ const initialState = {
   activeStudentsByProgramme: [],
   studentAdmissionSeekersByProgram: [],
   paymentsBySession: [],
-  studentPaymentById: []
+  studentPaymentById: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -94,6 +94,7 @@ const authReducer = (state = initialState, action) => {
       };
 
     case _const.GET_ACTIVE_STUDENTS:
+      console.log("Action payload", action.payload);
       return {
         ...state,
         activeStudents: action.payload,
@@ -186,14 +187,14 @@ const authReducer = (state = initialState, action) => {
     case _const.GET_PAYMENTS_BY_SESSION:
       return {
         ...state,
-        paymentsBySession: action.payload
-      }
+        paymentsBySession: action.payload,
+      };
 
-      case _const.GET_STUDENT_PAYMENT_BY_ID:
-        return {
-          ...state,
-          studentPaymentById: action.payload
-        }
+    case _const.GET_STUDENT_PAYMENT_BY_ID:
+      return {
+        ...state,
+        studentPaymentById: action.payload,
+      };
 
     default:
       return state;

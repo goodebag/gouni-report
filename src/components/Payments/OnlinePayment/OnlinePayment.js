@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import PropsTypes from "prop-types";
 import Pdf from "react-to-pdf";
 import { createBrowserHistory } from "history";
@@ -7,9 +7,12 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import { getPaymentsBySession } from "../../../redux/actions/authAction";
 import Table from "../../Reusables/Table/Table";
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 
 const OnlinePayment = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
   const paymentsBySession = useSelector(
     (state) => state.auth.paymentsBySession
   );
@@ -17,18 +20,28 @@ const OnlinePayment = () => {
   const dispatch = useDispatch();
   const ref = useRef();
 
-  useEffect(() => {
-    const data = {
-      sessionId: 0,
-      sessionName: "",
-      activated: true,
-      adminting: true,
-      paymentMode: 2,
-    };
+  const handleOnlinePayment = useCallback(async () => {
+    setError(null);
+    try {
+      const data = {
+        sessionId: 0,
+        sessionName: "",
+        activated: true,
+        adminting: true,
+        paymentMode: 2,
+      };
+      await dispatch(getPaymentsBySession(data));
+    } catch (error) {
+      setError(error.message);
+    }
+  }, [dispatch, setError]);
 
-    dispatch(getPaymentsBySession(data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    setIsLoading(true);
+    handleOnlinePayment().then(() => {
+      setIsLoading(false);
+    });
+  }, [handleOnlinePayment]);
 
   const handlePayment = (student) => {
     createBrowserHistory().push(`/payment/${student.paymentId}`);
@@ -82,26 +95,16 @@ const OnlinePayment = () => {
     },
   ];
 
-  let renderData = () => {
-    if (paymentsBySession.length === 0 || !paymentsBySession) {
-      return <h5 className="text-center mb-0 p-md-0 p-4">Data not found. Select another session from the dropdown to show the data!</h5>;
-    } else {
-      return (
-        <div ref={ref} id="section-to-print">
-          <Table id="emp" columns={columns} data={getData(paymentsBySession)} />
-        </div>
-      );
-    }
-  };
+  let checkArrLength = paymentsBySession.length === 0;
 
-  return (
-    <div className="page-wrapper">
-      <div className="container-fluid forms-wrapper">
-        <div className="row">
-          <div className="col-lg-12 px-0">
-            <div className="card border__radius_20">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
+  const topCard = (
+    <div className="row">
+      <div className="col-lg-12 px-0">
+        <div className="card border__radius_20">
+          <div className="card-body">
+            <div className="d-flex align-items-center">
+              {!isLoading && !checkArrLength ? (
+                <>
                   <ReactHTMLTableToExcel
                     className="btn btn-sm pg-button btn-primary py-2"
                     table="emp"
@@ -119,15 +122,75 @@ const OnlinePayment = () => {
                       </button>
                     )}
                   </Pdf>
-                  <Dropdown />
-                </div>
-              </div>
+                </>
+              ) : null}
+              <Dropdown />
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+
+  if (error) {
+    return (
+      <div className="page-wrapper">
+        <div className="container-fluid forms-wrapper">
+          {!error ? topCard : null}
+          <div className="row">
+            <div className="col-lg-12 card card-body border__radius_20">
+              <h5 className="mb-0 text-center">An error occurred!</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="page-wrapper">
+        <div className="container-fluid forms-wrapper">
+          {topCard}
+          <div className="row">
+            <div className="col-lg-12 card card-body border__radius_20">
+              <h5 className="mb-0 text-center">Loading...</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (checkArrLength) {
+    return (
+      <div className="page-wrapper">
+        <div className="container-fluid forms-wrapper">
+          {topCard}
+          <div className="row">
+            <div className="col-lg-12 card card-body border__radius_20">
+              <h5 className="mb-0 text-center">
+                Data not found. Select another session from the dropdown to show
+                the data!
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page-wrapper">
+      <div className="container-fluid forms-wrapper">
+        {topCard}
         <div className="row">
           <div className="col-lg-12 card-layout border__radius_20">
-            {renderData()}
+            <Table
+              id="emp"
+              columns={columns}
+              data={getData(paymentsBySession)}
+            />
           </div>
         </div>
       </div>

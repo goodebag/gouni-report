@@ -27,8 +27,7 @@ export const login = (data) => {
       );
       dispatch({ type: _const.SET_LOADING, payload: false });
       dispatch({ type: _const.LOGIN_FAIL });
-      // throw err;
-      // console.error(err)
+      throw err;
     }
   };
 };
@@ -47,7 +46,7 @@ export const registerStudent = (data) => {
         }
       );
       if (response.status === 200) {
-        NotificationManager.success("Successful", "Student Found", 1500);
+        NotificationManager.success("Successful", "Candidate Found", 1500);
         setTimeout(() => {
           dispatch({
             type: _const.REGISTER_STUDENT_SUCCESS,
@@ -187,17 +186,16 @@ export const getOneStudent = (Person) => {
 export const getActiveStudents = (data) => {
   return async (dispatch) => {
     try {
-      const body = JSON.stringify({ data });
-      let response = await baseUrl.post("/api/Reports/ActiveStudents", body, {
+      const res = await baseUrl.post("/api/Reports/ActiveStudents", data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: AuthUtility.RetrieveAuthorizationHeader(),
         },
       });
-      let payload = await response.data;
+      const resData = await res.data;
       dispatch({
         type: _const.GET_ACTIVE_STUDENTS,
-        payload: payload,
+        payload: resData
       });
     } catch (error) {
       throw error;
@@ -364,12 +362,17 @@ export const getTotalNumberOfAdmissionSeekers = (data) => {
 export const getAllSession = () => {
   return async (dispatch) => {
     try {
-      let response = await baseUrl.get("/api/Reports/GetAllSession", {
+      const response = await baseUrl.get("/api/Reports/GetAllSession", {
         headers: {
           "Content-Type": "application/json",
           Authorization: AuthUtility.RetrieveAuthorizationHeader(),
         },
       });
+
+      if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+      }
+
       dispatch({
         type: _const.GET_ALL_SESSION,
         payload: response.data,
@@ -492,7 +495,10 @@ export const getActiveStudentsByProgramme = (data) => {
 export const getStudentAdmissionSeekersByProgram = (data) => {
   return async (dispatch) => {
     try {
-      const res = await baseUrl.post("/api/Reports/GetStudentAdmissionSeekersByProgram", data, {
+      const res = await baseUrl.post(
+        "/api/Reports/GetStudentAdmissionSeekersByProgram",
+        data,
+        {
           headers: {
             "Content-Type": "application/json",
             Authorization: AuthUtility.RetrieveAuthorizationHeader(),
@@ -509,11 +515,12 @@ export const getStudentAdmissionSeekersByProgram = (data) => {
   };
 };
 
-export const getPaymentsBySession = (data) => {
-  console.log("Data Dog", data);
+export const getStudentPaymentById = (paymentId) => {
   return async (dispatch) => {
     try {
-      const res = await baseUrl.post("/api/Reports/GetPaymentsBySession", data, {
+      const res = await baseUrl.get(
+        `api/Reports/GetSTUDENTPaymentById/${paymentId}`,
+        {
           headers: {
             "Content-Type": "application/json",
             Authorization: AuthUtility.RetrieveAuthorizationHeader(),
@@ -521,7 +528,7 @@ export const getPaymentsBySession = (data) => {
         }
       );
       dispatch({
-        type: _const.GET_PAYMENTS_BY_SESSION,
+        type: _const.GET_STUDENT_PAYMENT_BY_ID,
         payload: res.data,
       });
     } catch (error) {
@@ -530,17 +537,26 @@ export const getPaymentsBySession = (data) => {
   };
 };
 
-export const getStudentPaymentById = (paymentId) => {
+export const getPaymentsBySession = (data) => {
   return async (dispatch) => {
     try {
-      const res = await baseUrl.get(`api/Reports/GetSTUDENTPaymentById/${paymentId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: AuthUtility.RetrieveAuthorizationHeader(),
-        },
-      });
+      const res = await baseUrl.post(
+        "/api/Reports/GetPaymentsBySession",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: AuthUtility.RetrieveAuthorizationHeader(),
+          },
+        }
+      );
+
+      if (res.status !== 200) {
+        throw new Error("Something went wrong!");
+      }
+
       dispatch({
-        type: _const.GET_STUDENT_PAYMENT_BY_ID,
+        type: _const.GET_PAYMENTS_BY_SESSION,
         payload: res.data,
       });
     } catch (error) {

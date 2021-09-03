@@ -7,6 +7,9 @@ import { login } from "../../redux/actions/authAction";
 import { clearErrors } from "../../redux/actions/errorAction";
 
 const Login = () => {
+  const ref = useRef();
+  const dispatch = useDispatch();
+
   const initialState = {
     username: "",
     password: "",
@@ -14,11 +17,8 @@ const Login = () => {
   };
 
   const [{ username, password, msg }, setState] = useState(initialState);
-
+  const [isLoading, setIsLoading] = useState(false);
   const error = useSelector((state) => state.error);
-
-  const ref = useRef();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (error !== ref.error) {
@@ -30,12 +30,12 @@ const Login = () => {
     }
   }, [error]);
 
-  const handleChange = (event) => {
+  const handleOnChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -47,7 +47,9 @@ const Login = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(login(data));
+    setIsLoading(true);
+    await dispatch(login(data));
+    setIsLoading(false);
   };
 
   return (
@@ -85,7 +87,7 @@ const Login = () => {
               placeholder="Username"
               required
               value={username || ""}
-              onChange={handleChange}
+              onChange={handleOnChange}
             />
             <label htmlFor="username">Username</label>
           </div>
@@ -97,7 +99,7 @@ const Login = () => {
               placeholder="Password"
               required
               value={password || ""}
-              onChange={handleChange}
+              onChange={handleOnChange}
             />
             <label htmlFor="password">Password</label>
           </div>
@@ -105,7 +107,7 @@ const Login = () => {
             className="btn btn-lg btn-primary btn-block rounded-pill mt-4"
             type="submit"
           >
-            Login
+            {isLoading ? "Loading..." : "Login"}
           </button>
         </div>
       </form>
@@ -114,7 +116,7 @@ const Login = () => {
       </footer>
     </div>
   );
-}
+};
 
 Login.propsTypes = {
   authorize: PropsTypes.bool,

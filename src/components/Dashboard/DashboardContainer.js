@@ -20,7 +20,6 @@ const DashboardContainer = () => {
       createBrowserHistory().push("/login");
       createBrowserHistory().go();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dispatch = useDispatch();
@@ -29,8 +28,7 @@ const DashboardContainer = () => {
 
   useEffect(() => {
     dispatch(getAllSession());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const [selectedOption, setSelectedOption] = useState("");
 

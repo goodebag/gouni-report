@@ -8,7 +8,7 @@ import { RoleConst } from "../../constants/RoleConstant";
 import { createBrowserHistory } from "history";
 import EditStudent from "../EditStudent/EditStudent";
 
-const RegisterStudent = () => {
+const CandidateForm = () => {
   const initialState = {
     firstName: "",
     lastName: "",
@@ -56,7 +56,7 @@ const RegisterStudent = () => {
   };
 
   const getBack = () => {
-    createBrowserHistory().push("/students");
+    createBrowserHistory().push("/candidates");
     createBrowserHistory().go(0);
   };
 
@@ -88,7 +88,7 @@ const RegisterStudent = () => {
           <form className="" onSubmit={handleSubmit}>
             <div className="card-layout py-4 mt-3 mt-md-0">
               <div className="d-flex justify-content-between">
-                <h2 className="font-weight-bold mb-0">Get Student</h2>
+                <h2 className="font-weight-bold mb-0">Get Candidate</h2>
                 <button
                   className="btn btn-sm pg-button btn-primary px-4"
                   onClick={() => getBack()}
@@ -183,11 +183,11 @@ const RegisterStudent = () => {
   );
 };
 
-RegisterStudent.propsTypes = {
+CandidateForm.propsTypes = {
   error: PropsTypes.object.isRequired,
   registerStudent: PropsTypes.func.isRequired,
   clearErrors: PropsTypes.func.isRequired,
   student: PropsTypes.object.isRequired,
 };
 
-export default RegisterStudent;
+export default CandidateForm;

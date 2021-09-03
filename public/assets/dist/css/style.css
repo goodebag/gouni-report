@@ -1,12 +1,11 @@
 body, html {
   -webkit-font-smoothing: antialiased;
-  /* font-family: 'Roboto', sans-serif; */
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 1rem;
   color: #2d3748;
   padding: 0;
   margin: 0;
+  line-height: 1.5;
 }
 
 .fa, .fab, .fal, .far, .fas {
@@ -18205,79 +18204,11 @@ body, html {
   box-shadow: 0 8px 15px rgba(2, 142, 225, .3)
 }
 
-/*!
-* Bootstrap v4.4.1 (https://getbootstrap.com/)
-* Copyright 2011-2019 The Bootstrap Authors
-* Copyright 2011-2019 Twitter, Inc.
-* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-*/
-
-/* :root {
-  --blue: #1e88e5;
-  --indigo: #6610f2;
-  --purple: #7460ee;
-  --pink: #e83e8c;
-  --red: #fc4b6c;
-  --orange: #fb8c00;
-  --yellow: #ffb22b;
-  --green: #21c1d6;
-  --teal: #20c997;
-  --cyan: #3d67ca;
-  --white: #fff;
-  --gray: #6c757d;
-  --gray-dark: #343a40;
-  --blue: #1e88e5;
-  --indigo: #6610f2;
-  --purple: #7460ee;
-  --pink: #e83e8c;
-  --red: #fc4b6c;
-  --orange: #fb8c00;
-  --yellow: #ffb22b;
-  --green: #21c1d6;
-  --teal: #20c997;
-  --cyan: #3d67ca;
-  --white: #fff;
-  --gray: #6c757d;
-  --primary: #7460ee;
-  --secondary: #6c757d;
-  --success: #21c1d6;
-  --info: #1e88e5;
-  --warning: #ffb22b;
-  --danger: #fc4b6c;
-  --light: #f2f4f8;
-  --dark: #343a40;
-  --cyan: #3d67ca;
-  --orange: #fb8c00;
-  --purple: #7460ee;
-  --inverse: #2f3d4a;
-  --megna: #01c0c8;
-  --light-danger: #f9e7eb;
-  --light-success: #e8fdeb;
-  --light-warning: #fff8ec;
-  --light-primary: #f1effd;
-  --light-info: #cfecfe;
-  --light-inverse: #f6f6f6;
-  --light-megna: #e0f2f4;
-  --dark-danger: #e6294b;
-  --dark-success: #1eacbe;
-  --dark-warning: #e9ab2e;
-  --dark-primary: #6352ce;
-  --dark-info: #028ee1;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1600px;
-  --font-family: 'Roboto', sans-serif;
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
-} */
-
 *, ::after, ::before {
   box-sizing: border-box
 }
 
 html {
-  /* font-family: 'Roboto', sans-serif; */
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent
@@ -18289,7 +18220,6 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  /* font-family: 'Roboto', sans-serif; */
   font-size: .875rem;
   font-weight: 300;
   line-height: 1.5;
@@ -18399,7 +18329,7 @@ a:not([href]):hover {
 }
 
 code, kbd, pre, samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
   font-size: 1em
 }
 
@@ -25883,7 +25813,6 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  /* font-family: 'Roboto', sans-serif; */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -25996,7 +25925,6 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  /* font-family: 'Roboto', sans-serif; */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -29283,7 +29211,7 @@ a.bg-dark-info:focus, a.bg-dark-info:hover, button.bg-dark-info:focus, button.bg
 }
 
 .text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace!important
+  /* font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace!important */
 }
 
 .text-justify {
@@ -34335,7 +34263,6 @@ form label {
   padding: 10px 10px 10px 0;
   display: block;
   border: none;
-  /* font-family: 'Roboto', sans-serif; */
   border-radius: 0;
   border-bottom: 1px solid #e9ecef
 }
@@ -34778,7 +34705,6 @@ form label {
   border: 1px solid rgba(120, 130, 140, .13);
   padding: 8px 16px;
   height: auto;
-  /* font-family: 'Roboto', sans-serif; */
   font-weight: 400;
   border-radius: 0
 }
@@ -41190,6 +41116,7 @@ table td, table th {
 
 .table-wrapper table tbody td {
   padding: 10px;
+  font-size: 15px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -41332,4 +41259,16 @@ table td, table th {
 
 .img__card {
   height: 60px;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%)!important;
+}
+
+.rounded-md {
+  border-radius: .375rem!important;
+}
+
+.bg-blue {
+  padding: 6px 10px;
 }
