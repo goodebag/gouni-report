@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropsTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -7,41 +7,42 @@ import {
 } from "../../redux/actions/authAction";
 
 const Dropdown = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllSession());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const allSession = useSelector((state) => state.auth.allSession);
-
-  let [selectedOption, setSelectedOption] = useState({
+  const [selectedOption, setSelectedOption] = useState({
     session_Id: 0,
     session_Name: "",
     activated: true,
     adminting: true,
   });
 
+  const allSession = useSelector((state) => state.auth.allSession);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllSession());
+  }, [dispatch]);
+
   const onSelectedChanged = (e) => setSelectedOption(e.target.value);
 
-  let sessionData = allSession.filter(
+  const filteredSession = allSession.filter(
     (session) => session.sessionName === selectedOption
   );
 
-  useEffect(() => {
+  const getResult = useCallback(() => {
     if (selectedOption) {
-      let data = sessionData[0];
-      dispatch(getAdmissionSeekers(data || selectedOption));
+      let eachSession = filteredSession[0];
+      dispatch(getAdmissionSeekers(eachSession ? eachSession : selectedOption));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOption]);
+  }, [dispatch, selectedOption]);
+
+  useEffect(() => {
+    getResult();
+  }, [getResult]);
 
   return (
     <div className="ml-auto">
       <select className="select-dropdown" onChange={onSelectedChanged}>
-        <option>Select Session</option>
-        {allSession.map((session, index) => (
+        {[...allSession].reverse().map((session, index) => (
           <option key={index} value={session.id}>
             {session.sessionName}
           </option>

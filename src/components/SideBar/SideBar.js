@@ -26,7 +26,6 @@ const SideBar = () => {
         <div
           className="user-profile"
           style={{ background: `url(${wall}) no-repeat` }}
-          // style={{backgroundColor: "#d6d6d6"}}
         >
           <div className="profile-img">
             <img src={logo} alt="user" className="w-100 rounded-circle" />
@@ -47,11 +46,11 @@ const SideBar = () => {
             <li className="sidebar-item">
               <a
                 className="sidebar-link waves-effect waves-dark"
-                href="/students"
+                href="/candidates"
                 aria-expanded="false"
               >
                 <i className="mdi mdi-collage" />
-                <span className="hide-menu">Students </span>
+                <span className="hide-menu">Admitted Candidates </span>
               </a>
             </li>
             <li className="sidebar-item">
@@ -61,41 +60,19 @@ const SideBar = () => {
                 aria-expanded="false"
               >
                 <i className="mdi mdi-widgets" />
-                <span className="hide-menu">Sessions </span>
+                <span className="hide-menu">UnAdmitted Candidates </span>
               </a>
             </li>
-
-            {/* <li className="sidebar-item">
-              <a
-                className="sidebar-link waves-effect waves-dark"
-                href="/payments"
-                aria-expanded="false"
-              >
-                <i className="mdi mdi-dns" />
-                <span className="hide-menu">Payments </span>
-              </a>
-            </li> */}
-
             <li className="sidebar-item">
-              <a
-                className="sidebar-link has-arrow waves-effect waves-dark"
-                href="javascript:void(0)"
-                aria-expanded="false"
-              >
+              <a className="sidebar-link has-arrow waves-effect waves-dark" href="#!">
                 <i className="mdi mdi-dns"></i>
                 <span className="hide-menu">Payments </span>
               </a>
-              <ul aria-expanded="false" className="collapse  first-level">
+              <ul className="collapse first-level">
                 <li className="sidebar-item">
                   <a href="/allpayments" className="sidebar-link">
                     <i className="mdi mdi-adjust"></i>
                     <span className="hide-menu">All Payments </span>
-                  </a>
-                </li>
-                <li className="sidebar-item">
-                  <a href="/offlinepayment" className="sidebar-link">
-                    <i className="mdi mdi-adjust"></i>
-                    <span className="hide-menu">Offline Payment</span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -104,9 +81,14 @@ const SideBar = () => {
                     <span className="hide-menu">Online Payment</span>
                   </a>
                 </li>
+                <li className="sidebar-item">
+                  <a href="/offlinepayment" className="sidebar-link">
+                    <i className="mdi mdi-adjust"></i>
+                    <span className="hide-menu">Offline Payment</span>
+                  </a>
+                </li>
               </ul>
             </li>
-
             <li className="sidebar-item">
               <span
                 className="sidebar-link waves-effect waves-dark"

@@ -23,16 +23,15 @@ const PostGraduateChart = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleData = useCallback(() => {
-    dispatch(getActiveStudentsNumberBySession(props.data));
-    dispatch(getTotalNumberOfAdmissionSeekers(props.data));
-    dispatch(getConvertedStudentsBySession(props.data));
-  }, []);
+  const handleData = useCallback(async () => {
+    await dispatch(getActiveStudentsNumberBySession(props.data));
+    await dispatch(getTotalNumberOfAdmissionSeekers(props.data));
+    await dispatch(getConvertedStudentsBySession(props.data));
+  }, [dispatch]);
 
   useEffect(() => {
     handleData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleData]);
+  }, [dispatch, handleData]);
 
   const data = {
     labels: [

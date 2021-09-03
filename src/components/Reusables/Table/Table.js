@@ -71,14 +71,14 @@ const Table = (props) => {
         <button
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
-          className="btn btn-primary btn-sm mr-2 pg-button"
+          className="btn btn-primary btn-sm mr-2 rounded bg-blue"
         >
           Previous
         </button>
         <button
           onClick={() => nextPage()}
           disabled={!canNextPage}
-          className="btn btn-primary btn-sm pg-button"
+          className="btn btn-primary btn-sm rounded bg-blue"
         >
           Next
         </button>

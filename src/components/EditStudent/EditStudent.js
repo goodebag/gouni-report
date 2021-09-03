@@ -64,7 +64,7 @@ const EditStudent = () => {
   };
 
   const getBack = () => {
-    createBrowserHistory().push("/students");
+    createBrowserHistory().push("/candidates");
     createBrowserHistory().go(0);
   };
 
@@ -87,7 +87,7 @@ const EditStudent = () => {
       <form className="" onSubmit={handleSubmit}>
         <div className="card-layout py-4">
           <div className="d-flex justify-content-between">
-            <h2 className="font-weight-bold mb-0">Edit Student</h2>
+            <h2 className="font-weight-bold mb-0">Edit Candidate</h2>
             <button
               className="btn btn-sm pg-button btn-primary px-4"
               onClick={() => getBack()}

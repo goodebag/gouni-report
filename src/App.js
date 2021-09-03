@@ -10,15 +10,15 @@ import Authenticated from "./utils/Authenticated";
 import Loader from "./components/Reusables/Loader/Loader";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Auth/Login";
-import RegisterStudent from "./components/RegisterStudent";
-import Students from "./components/Students";
+import CandidateForm from "./components/Candidate";
+import Candidates from "./components/Candidates";
 import Student from "./components/Student";
 import UnadmittedCandidate from "./components/UnadmittedCandidate";
 import PaymentsSession from "./components/PaymentsSession";
 import Sessions from "./components/Sessions";
 import AllPayments from "./components/Payments/AllPayments";
-import OfflinePayment from "./components/Payments/OfflinePayment";
 import OnlinePayment from "./components/Payments/OnlinePayment";
+import OfflinePayment from "./components/Payments/OfflinePayment";
 import StudentPayment from "./components/StudentPayment";
 import NotFound from "./components/NotFound/NotFound";
 import checkToken from "./utils/checkToken";
@@ -26,8 +26,7 @@ import checkToken from "./utils/checkToken";
 export default function App() {
   useEffect(() => {
     checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkToken()]);
+  });
 
   return (
     <Provider store={store}>
@@ -39,10 +38,10 @@ export default function App() {
             <Route exact path="/login" component={Authenticated(Login)} />
             <Route
               exact
-              path="/student"
-              component={Authorize(RegisterStudent)}
+              path="/candidate"
+              component={Authorize(CandidateForm)}
             />
-            <Route exact path="/students" component={Authorize(Students)} />
+            <Route exact path="/candidates" component={Authorize(Candidates)} />
             <Route exact path="/student/:id" component={Authorize(Student)} />
             <Route
               exact
@@ -57,13 +56,13 @@ export default function App() {
             />
             <Route
               exact
-              path="/offlinepayment"
-              component={Authorize(OfflinePayment)}
+              path="/onlinepayment"
+              component={Authorize(OnlinePayment)}
             />
             <Route
               exact
-              path="/onlinepayment"
-              component={Authorize(OnlinePayment)}
+              path="/offlinepayment"
+              component={Authorize(OfflinePayment)}
             />
             <Route
               exact

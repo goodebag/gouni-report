@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../Reusables/Header/Header";
 import SideBar from "../SideBar/SideBar";
-import Students from "./Students";
+import CandidateForm from "./CandidateForm";
 
 const index = () => {
   return (
     <>
       <Header />
       <SideBar />
-      <Students />
+      <CandidateForm />
     </>
   );
 };

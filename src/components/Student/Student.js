@@ -14,11 +14,10 @@ const Student = () => {
 
   useEffect(() => {
     dispatch(getOneStudent(params));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+  }, [dispatch, params]);
 
   const getBack = () => {
-    createBrowserHistory().push("/students");
+    createBrowserHistory().push("/candidates");
     createBrowserHistory().go(0);
   };
 

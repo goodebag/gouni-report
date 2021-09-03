@@ -14,8 +14,7 @@ import {
 } from "../../redux/actions/authAction";
 import ModalTable from "./ModalTable";
 
-function UnderGraduateColumn(props) {
-
+const UnderGraduateColumn = (props) => {
   const activeStudentsNumberBySession = useSelector(
     (state) => state.auth.activeStudentsNumberBySession
   );
@@ -34,8 +33,7 @@ function UnderGraduateColumn(props) {
     dispatch(getActiveStudentsNumberBySession(props.data));
     dispatch(getTotalNumberOfAdmissionSeekers(props.data));
     dispatch(getConvertedStudentsBySession(props.data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.data]);
+  }, [dispatch, props.data]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -54,8 +52,8 @@ function UnderGraduateColumn(props) {
 
     dispatch(getActiveStudentsByProgramme(data));
     setTimeout(() => {
-      openModal()
-    }, 800)
+      openModal();
+    }, 800);
   };
 
   const handleGetAdmissionSeekers = () => {
@@ -69,13 +67,13 @@ function UnderGraduateColumn(props) {
 
     dispatch(getStudentAdmissionSeekersByProgram(data));
     setTimeout(() => {
-      openModal()
-    }, 800)
+      openModal();
+    }, 800);
   };
 
   return (
     <>
-    <ModalTable modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
+      <ModalTable modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       <div className="col-lg-4 col-md-6 col-sm-12">
         <div
           className="card border__radius_20 shadow-sm"
@@ -146,6 +144,6 @@ function UnderGraduateColumn(props) {
       </div>
     </>
   );
-}
+};
 
 export default UnderGraduateColumn;

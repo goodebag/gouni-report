@@ -35,19 +35,10 @@ const customStyles = {
   },
 };
 
-function ModalTable(props) {
-  // console.log("Props", props)
-
+const ModalTable = (props) => {
   useEffect(() => {
     Modal.setAppElement("body");
   }, []);
-
-  //   let subtitle;
-  // const [modalIsOpen, setIsOpen] = useState(false);
-
-  // function openModal() {
-  //   setIsOpen(true);
-  // }
 
   function closeModal() {
     props.setIsOpen(false);
@@ -135,7 +126,7 @@ function ModalTable(props) {
           >
             Payment
           </button>
-        )
+        ),
       };
     });
   }
@@ -181,6 +172,6 @@ function ModalTable(props) {
       </Modal>
     </div>
   );
-}
+};
 
 export default ModalTable;
