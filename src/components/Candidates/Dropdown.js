@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { getActiveStudents } from "../../redux/actions/authAction";
 
 const Dropdown = () => {
-  const dispatch = useDispatch();
-
   const [selectedSession, setSelectedSession] = useState({
     session_Id: 0,
     session_Name: "",
@@ -92,6 +90,8 @@ const Dropdown = () => {
   const filteredSession = sessions.filter(
     (session) => session.sessionName === selectedSession
   );
+
+  const dispatch = useDispatch();
 
   const handleResult = useCallback(() => {
     if (selectedSession) {

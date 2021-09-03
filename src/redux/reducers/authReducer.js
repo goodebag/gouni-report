@@ -94,7 +94,6 @@ const authReducer = (state = initialState, action) => {
       };
 
     case _const.GET_ACTIVE_STUDENTS:
-      console.log("Action payload", action.payload);
       return {
         ...state,
         activeStudents: action.payload,

@@ -148,13 +148,7 @@ const Candidates = () => {
         <div className="row">
           <div className="col-lg-12 card-layout border__radius_20">
             <div ref={ref} id="section-to-print">
-              <div ref={ref} id="section-to-print">
-                <Table
-                  id="emp"
-                  columns={columns}
-                  data={getData(activeStudents)}
-                />
-              </div>
+              <Table id="emp" columns={columns} data={getData(activeStudents)} />
             </div>
           </div>
         </div>
